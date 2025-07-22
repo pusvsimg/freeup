@@ -1,5 +1,5 @@
 Auto Update Worker - GitHub Actions 自动化更新脚本
-这是一个通用的 GitHub Actions 工作流，旨在自动从指定的上游仓库（bia-pain-bache/BPB-Worker-Panel）拉取最新的 Release 文件，并将其更新到你自己的仓库中。
+这是一个通用的 GitHub Actions 工作流，旨在自动从指定的上游仓库拉取最新的 Release 文件，并将其更新到你自己的仓库中。
 
 它非常适合用于自动同步 Cloudflare Worker、前端静态资源或任何其他通过 GitHub Release 发布的文件，确保你的项目始终保持最新。
 
@@ -31,7 +31,7 @@ Auto Update Worker - GitHub Actions 自动化更新脚本
 
 读取你仓库根目录下的 version.txt 文件，获取本地版本号。
 
-通过 GitHub API 获取上游仓库（bia-pain-bache/BPB-Worker-Panel）的最新 Release 的 tag_name 作为远程版本号。
+通过 GitHub API 获取上游仓库的最新 Release 的 tag_name 作为远程版本号。
 
 判断更新：
 
@@ -64,23 +64,7 @@ Auto Update Worker - GitHub Actions 自动化更新脚本
 │   └── workflows/
 │       └── up.yml      <-- 将脚本代码粘贴在这里
 └── ... (其他文件)
-2. 创建版本文件
-在你的仓库根目录下创建一个名为 version.txt 的文件。为了让脚本首次运行时能正常工作，可以先在里面写入一个初始版本号，例如：
 
-0.0.0
-3. (可选) 自定义配置
-如果你想跟踪不同的仓库或文件，可以修改 up.yml 文件顶部的 env 环境变量：
-
-YAML
-
-jobs:
-  update:
-    runs-on: ubuntu-latest
-    env: # 修改这里的配置
-      REPO_OWNER: "bia-pain-bache"  # 目标仓库的所有者
-      REPO_NAME: "BPB-Worker-Panel"   # 目标仓库的名称
-      TARGET_FILE: "worker.zip"       # 目标 Release 中的资源文件名
-你也可以修改 schedule 部分的 cron 表达式来调整自动检查的频率。
 
 4. 启用 Actions 并查看结果
 完成以上步骤后，工作流将根据你设置的触发条件自动运行。你可以在仓库的 "Actions" 标签页中查看所有运行记录。
